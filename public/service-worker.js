@@ -3,7 +3,8 @@ self.addEventListener("fetch", (event) => {
     
     const url = new URL(event.request.url);
     
-    if (validRoutes.includes(url.pathname)) {
+    console.log(url);
+    if (url.includes("about")) {
       // Allow the request to continue to React
       return;
     }
