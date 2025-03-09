@@ -1,4 +1,4 @@
-self.addEventListener("fetch", (event: any) => {
+self.addEventListener("fetch", (event) => {
     const validRoutes = ["/", "/about"];
     
     const url = new URL(event.request.url);
