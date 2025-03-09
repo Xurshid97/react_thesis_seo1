@@ -1,17 +1,20 @@
 self.addEventListener("fetch", (event) => {
   const validRoutes = ["/", "/about"];
-
   const url = new URL(event.request.url);
 
-  // Skip intercepting requests for assets like CSS, JS, or images
+  // Skip asset requests like CSS, JS, or images
   if (url.pathname.endsWith(".css") || url.pathname.endsWith(".js") || url.pathname.includes("assets")) {
     return;
   }
 
-  console.log("Intercepting fetch request for: ", url.pathname);
-  // Check if the requested URL pathname is in the list of valid routes
+  // If the route is valid, return the main index.html for React Router to take over
   if (validRoutes.includes(url.pathname)) {
-    // Allow the request to continue to React (let it pass through)
+    event.respondWith(
+      caches.match("/index.html").then((cachedResponse) => {
+        // Serve index.html from cache or fetch from network
+        return cachedResponse || fetch("/index.html");
+      })
+    );
     return;
   }
 
