@@ -4,15 +4,10 @@ import './index.css'
 import App from './App.tsx'
 
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker
-    .register('/service-worker.js')  // ✅ Reference the JS file, NOT TS
-    .then((registration) => {
-      console.log('Service Worker registered with scope:', registration.scope);
-    })
-    .catch((error) => {
-      console.log('Service Worker registration failed:', error);
-    });
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/sw.ts").then(() => {
+    console.log("Service Worker Registered");
+  });
 }
 
 
