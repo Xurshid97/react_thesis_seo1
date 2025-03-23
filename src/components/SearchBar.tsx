@@ -17,7 +17,7 @@ export default function SearchBar({ selectedCrop, setSelectedCrop, userLocation,
         className='searchBar'>
         <Autocomplete
           options={crops}
-          sx={{ width: 280 }}
+          sx={{ width: 200 }}
           onChange={(_, newValue) => setSelectedCrop(newValue)}
           renderInput={(params) => (
             <TextField
