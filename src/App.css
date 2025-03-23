@@ -10,13 +10,7 @@
 .screenCrop {
   /* height: '100vh', width: '500px', position: 'relative' */
   height: 100vh;
-  width: 500px;
+  width: 100vw;
   position: relative;
   margin: 0 auto;
-}
-@media screen and (max-width: 600px) {
-    .screenCrop {
-      height: 100vh;
-      width: 100vw;
-    }
 }

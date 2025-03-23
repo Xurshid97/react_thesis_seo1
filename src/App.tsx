@@ -23,7 +23,7 @@ function Recenter({ lat, lng }: { lat: number; lng: number }) {
     if (!map) return;
 
     // Create a temporary circle and add to map
-    const circle = L.circle([lat, lng], { radius: 1000 }).addTo(map);
+    const circle = L.circle([lat, lng], { radius: 500 }).addTo(map);
     const bounds = circle.getBounds();
     
     // Fit bounds and then remove the temporary circle
