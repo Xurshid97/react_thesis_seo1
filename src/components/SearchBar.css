@@ -1,0 +1,53 @@
+.searchBarMain{
+    /* position: "relative", width: "400px", margin: "auto"  */
+    position: relative;
+    width: 400px;
+    margin: auto;
+
+}
+
+.searchBar{
+    /* 
+    padding: "4px 16px",
+          marginTop: "3px",
+          display: "flex",
+          alignItems: "center",
+          gap: "8px",
+          position: "absolute",
+          zIndex: 100,
+          top: "0",
+          left: "50%",
+          transform: "translateX(-50%)",
+          backgroundColor: "white",
+          borderRadius: "25px",
+          boxShadow: "0 2px 8px rgba(0, 0, 0, 0.1)",
+          border: "1px solid #dfe1e5",
+          overflow: "hidden",
+          width: "auto",
+          maxWidth: "600px",
+    */
+    padding: 4px 16px;
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    border-radius: 25px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #dfe1e5;
+    overflow: hidden;
+    width: auto;
+    max-width: 600px;
+}
+
+@media screen and (max-width: 600px) {
+    .searchBarMain{
+        width: 80%;
+    }
+    
+}

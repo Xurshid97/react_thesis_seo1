@@ -106,24 +106,26 @@ export default function App() {
   };
 
   return (
-    <div style={{ height: '100vh', width: '500px', position: 'relative' }}>
-      <SearchBar selectedCrop = {selectedCrop} setSelectedCrop={setSelectedCrop} userLocation={userLocation} handleSave={handleSave}/>
+    <div style={{width: '100vw', height: '100vh', backgroundColor: '#f5f5f5'}}>
+      <div className='screenCrop' >
+        <SearchBar selectedCrop = {selectedCrop} setSelectedCrop={setSelectedCrop} userLocation={userLocation} handleSave={handleSave}/>
 
-  {/* Map container */}
-  <div style={{ height:'100vh', width: '100%', position: 'absolute', zIndex: 99}}>
-    <MapContainer
-      center={userLocation || [20, 77]}
-      zoom={5}
-      zoomControl={false}
-      style={{ height: '100%', width: '100%' }}
-    >
-      <MapComponent userLocation={userLocation} plots={plots} />
-      {userLocation && (
-        <Recenter lat={userLocation.lat} lng={userLocation.lng} />
-      )}
-      <ZoomControl position="bottomright" />
-    </MapContainer>
-  </div>
-</div>
+        {/* Map container */}
+        <div style={{ height:'100vh', width: '100%', position: 'absolute', zIndex: 99}}>
+          <MapContainer
+            center={userLocation || [20, 77]}
+            zoom={5}
+            zoomControl={false}
+            style={{ height: '100%', width: '100%' }}
+          >
+            <MapComponent userLocation={userLocation} plots={plots} />
+            {userLocation && (
+              <Recenter lat={userLocation.lat} lng={userLocation.lng} />
+            )}
+            <ZoomControl position="bottomright" />
+          </MapContainer>
+        </div>
+      </div>
+    </div>
   );
 }

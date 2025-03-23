@@ -7,3 +7,16 @@
   margin: 0;
   padding: 0;
 }
+.screenCrop {
+  /* height: '100vh', width: '500px', position: 'relative' */
+  height: 100vh;
+  width: 500px;
+  position: relative;
+  margin: 0 auto;
+}
+@media screen and (max-width: 600px) {
+    .screenCrop {
+      height: 100vh;
+      width: 100vw;
+    }
+}
