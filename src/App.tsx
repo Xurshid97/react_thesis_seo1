@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import { Autocomplete, TextField, Button, AppBar, Toolbar, Typography } from '@mui/material';
+import { MapContainer, TileLayer, Marker, Popup, useMap, ZoomControl } from 'react-leaflet';
 import L from 'leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import 'leaflet/dist/leaflet.css';
-
-// Fix Leaflet marker icons
+import './App.css'
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+import SearchBar from './components/SearchBar';
 
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: markerIcon2x,
@@ -16,7 +15,6 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 });
 
-const crops = ['Wheat', 'Corn', 'Rice', 'Potatoes', 'Soybeans', 'Cotton', 'Vegetables'];
 
 function Recenter({ lat, lng }: { lat: number; lng: number }) {
   const map = useMap();
@@ -48,12 +46,10 @@ function MapComponent({ userLocation, plots }: { userLocation: { lat: number; ln
     <>
       <TileLayer
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       />
-      
       {userLocation && (
         <Marker position={[userLocation.lat, userLocation.lng]}>
-          <Popup>Your Current Location</Popup>
+          <Popup>Sizning joyingiz</Popup>
         </Marker>
       )}
 
@@ -61,8 +57,8 @@ function MapComponent({ userLocation, plots }: { userLocation: { lat: number; ln
         {plots.map((plot) => (
           <Marker key={plot.id} position={[plot.lat, plot.lng]}>
             <Popup>
-              <strong>Crop:</strong> {plot.crop}<br />
-              <em>Planted on:</em> {new Date(plot.date).toLocaleDateString()}
+              <strong>O'simlik:</strong> {plot.crop}<br />
+              <em>Ekilgan vaqt:</em> {new Date(plot.date).toLocaleDateString()}
             </Popup>
           </Marker>
         ))}
@@ -110,45 +106,24 @@ export default function App() {
   };
 
   return (
-    <div style={{ height: '100vh', width: '100%' }}>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Farm Map Tracker
-          </Typography>
-        </Toolbar>
-      </AppBar>
+    <div style={{ height: '100vh', width: '500px', position: 'relative' }}>
+      <SearchBar selectedCrop = {selectedCrop} setSelectedCrop={setSelectedCrop} userLocation={userLocation} handleSave={handleSave}/>
 
-      <div style={{ padding: '20px', display: 'flex', gap: '10px' }}>
-        <Autocomplete
-          options={crops}
-          sx={{ width: 300 }}
-          onChange={(_, newValue) => setSelectedCrop(newValue)}
-          renderInput={(params) => (
-            <TextField {...params} label="Select Crop to Plant" />
-          )}
-        />
-        <Button
-          variant="contained"
-          onClick={handleSave}
-          disabled={!userLocation || !selectedCrop}
-        >
-          Save Plot
-        </Button>
-      </div>
-
-      <div style={{ height: 'calc(100vh - 128px)', width: '100%' }}>
-        <MapContainer
-          center={userLocation || [20, 77]}
-          zoom={5}
-          style={{ height: '100%', width: '100%' }}
-        >
-          <MapComponent userLocation={userLocation} plots={plots} />
-          {userLocation && (
-            <Recenter lat={userLocation.lat} lng={userLocation.lng} />
-          )}
-        </MapContainer>
-      </div>
-    </div>
+  {/* Map container */}
+  <div style={{ height:'100vh', width: '100%', position: 'absolute', zIndex: 99}}>
+    <MapContainer
+      center={userLocation || [20, 77]}
+      zoom={5}
+      zoomControl={false}
+      style={{ height: '100%', width: '100%' }}
+    >
+      <MapComponent userLocation={userLocation} plots={plots} />
+      {userLocation && (
+        <Recenter lat={userLocation.lat} lng={userLocation.lng} />
+      )}
+      <ZoomControl position="bottomright" />
+    </MapContainer>
+  </div>
+</div>
   );
 }
