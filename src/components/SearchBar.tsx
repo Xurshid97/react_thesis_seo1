@@ -25,12 +25,19 @@ export default function SearchBar({ selectedCrop, setSelectedCrop, userLocation,
               label="O'simlikni kiriting"
               variant="standard"
               size="small"
+              slotProps={{
+                input: {
+                  ...params.InputProps, 
+                  disableUnderline: true, // This removes the underline
+                },
+              }}
               style={{
                 outline: "none",
                 border: "none !important",
                 backgroundColor: "transparent",
                 display: "flex",
                 alignItems: "center",
+                paddingBottom: "10px",
               }}
             />
           )}

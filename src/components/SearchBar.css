@@ -1,7 +1,7 @@
 .searchBarMain{
     /* position: "relative", width: "400px", margin: "auto"  */
     position: relative;
-    width: 400px;
+    width: 420px;
     margin: auto;
 
 }
@@ -37,7 +37,7 @@
     left: 50%;
     transform: translateX(-50%);
     background-color: white;
-    border-radius: 25px;
+    border-radius: 30px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     border: 1px solid #dfe1e5;
     overflow: hidden;
